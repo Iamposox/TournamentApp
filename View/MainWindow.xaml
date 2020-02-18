@@ -11,10 +11,16 @@
             <ColumnDefinition/>
             <ColumnDefinition MaxWidth="300"/>
         </Grid.ColumnDefinitions>
-            <ContentPresenter Grid.Column="1">
-                <ContentPresenter.Content>
-                    <local:CurrentParticipantListUserControl/>
-                </ContentPresenter.Content>
-            </ContentPresenter>
+        <ContentPresenter Grid.Column="0">
+            <ContentPresenter.Content>
+                <local:TournamentUserControl/>
+            </ContentPresenter.Content>
+        </ContentPresenter>
+
+        <ContentPresenter Grid.Column="1">
+            <ContentPresenter.Content>
+                <local:CurrentParticipantListUserControl/>
+            </ContentPresenter.Content>
+        </ContentPresenter>
     </Grid>
 </Window>
