@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Tournaments.WPF.View
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Interaction logic for CurrentParticipantListUserControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CurrentParticipantListUserControl : UserControl
     {
-        public MainWindow()
+        public CurrentParticipantListUserControl()
         {
             InitializeComponent();
         }
