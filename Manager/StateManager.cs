@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tournaments.WPF.Model;
 
 namespace Tournaments.WPF.Manager
 {
     public class StateManager
     {
-        public List<Model.Participant> CurrentParticipants { get; }
-
+        public List<Participant> CurrentParticipants { get; set; }
         public StateManager()
         {
-            CurrentParticipants = new List<Model.Participant>();
+            CurrentParticipants = new List<Participant>();
         }
     }
 }
