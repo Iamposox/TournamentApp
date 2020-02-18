@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TournamentBracketGenerator
+namespace TournamentBracketGenerator.Model
 {
     public class Round
     {

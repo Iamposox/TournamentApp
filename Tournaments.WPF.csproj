@@ -93,7 +93,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Participant.cs" />
+    <Compile Include="Model\Participant_Wrapper.cs" />
     <Compile Include="ViewModel\ParticipantListViewModel.cs" />
     <Compile Include="View\CurrentParticipantListUserControl.xaml.cs">
       <DependentUpon>CurrentParticipantListUserControl.xaml</DependentUpon>
@@ -136,6 +136,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Control\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="BracketGenerate\BracketGenerate\BracketGenerate.csproj">
+      <Project>{8af1a350-ac9d-4923-b26a-290ef702d9f1}</Project>
+      <Name>BracketGenerate</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

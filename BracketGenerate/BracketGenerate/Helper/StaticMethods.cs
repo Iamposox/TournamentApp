@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TournamentBracketGenerator
+namespace TournamentBracketGenerator.Helper
 {
+    //Please Rename this class. StaticMethods is not saying much about what this class supposed to do
     public static class StaticMethods
     {
         public static bool isPowerOfTwo(int x)

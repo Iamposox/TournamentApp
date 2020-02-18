@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using TournamentBracketGenerator;
+using TournamentBracketGenerator.Model;
 using Tournaments.WPF.Abstract;
 using Tournaments.WPF.Model;
 

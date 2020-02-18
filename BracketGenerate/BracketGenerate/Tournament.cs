@@ -4,11 +4,13 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using TournamentBracketGenerator.Helper;
+using TournamentBracketGenerator.Model;
 
 namespace TournamentBracketGenerator
 {
-    [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.AutoDual)]
+    //This class is too long actually. 
+    //It seems it breaks Open/Close and Single Responsobility Princibles
     public class Tournament
     {
         public Tournament() { }
@@ -81,10 +83,11 @@ namespace TournamentBracketGenerator
 
 
         [ComVisible(true)]
-        public int countParticipants() 
-        {
-            return TotalParticipants.Count;
-        }
+        //Personaly I prefer Single Line Return 
+        public int countParticipants() => TotalParticipants.Count;
+        //{
+        //    return TotalParticipants.Count;
+        //}
 
 
         private void FillPreQualifiers()

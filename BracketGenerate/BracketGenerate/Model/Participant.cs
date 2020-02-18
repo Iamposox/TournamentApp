@@ -5,10 +5,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TournamentBracketGenerator
+namespace TournamentBracketGenerator.Model
 {
-    [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.AutoDual)]
     public class Participant
     {
         public Participant() { }
@@ -31,7 +29,14 @@ namespace TournamentBracketGenerator
             Weight = weight;
         }
 
+        public string Patronymic { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
+
+
         public string FullName { get; set; }
+
+
         public int ID { get; set; }
         public short Weight { get; set; }
 

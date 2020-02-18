@@ -9,20 +9,21 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BracketGenerate</RootNamespace>
     <AssemblyName>BracketGenerate</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <RegisterForComInterop>true</RegisterForComInterop>
-    <PlatformTarget>x64</PlatformTarget>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -48,15 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bracket.cs" />
-    <Compile Include="LastRoundBracket.cs" />
-    <Compile Include="Math.cs" />
-    <Compile Include="Participant.cs" />
-    <Compile Include="ParticipantPair.cs" />
-    <Compile Include="PreQualifyBracket.cs" />
+    <Compile Include="Model\Bracket.cs" />
+    <Compile Include="Model\LastRoundBracket.cs" />
+    <Compile Include="Model\Math.cs" />
+    <Compile Include="Model\Participant.cs" />
+    <Compile Include="Model\ParticipantPair.cs" />
+    <Compile Include="Model\PreQualifyBracket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Round.cs" />
-    <Compile Include="StaticMethods.cs" />
+    <Compile Include="Model\Round.cs" />
+    <Compile Include="Helper\StaticMethods.cs" />
     <Compile Include="Tournament.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

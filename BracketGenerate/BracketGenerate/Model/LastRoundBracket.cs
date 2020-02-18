@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TournamentBracketGenerator
+namespace TournamentBracketGenerator.Model
 {
     public class LastRoundBracket : Bracket
     {
@@ -19,6 +19,7 @@ namespace TournamentBracketGenerator
             _round = round;
             setBrackerId();
         }
+        //Any reason this is lower case?
         private void setBrackerId()
         {
             Random rnd = new Random();
@@ -26,7 +27,8 @@ namespace TournamentBracketGenerator
             _bracketBlueId = _bracketRedId == 0 ? 1 : 0;
             
         }
-
+        
+        //Any reason this is lower case?
         private void setBrackets()
         {
             Random rnd = new Random();

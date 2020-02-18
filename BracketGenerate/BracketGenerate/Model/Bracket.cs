@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TournamentBracketGenerator.Model;
 
 namespace TournamentBracketGenerator
 {
@@ -29,6 +30,7 @@ namespace TournamentBracketGenerator
                 {
                     _winnerName = _sectionRed + _sectionBlue;
                 }
+                //Switch case doesnt exists (not mentioning pattern matching)....
                 if (string.IsNullOrWhiteSpace(_winnerName))
                 {
                     if (Winner == null)
