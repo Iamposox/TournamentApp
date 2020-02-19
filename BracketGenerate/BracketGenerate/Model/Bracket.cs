@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TournamentBracketGenerator.Model;
 
-namespace TournamentBracketGenerator
+namespace TournamentBracketGenerator.Model
 {
     public class Bracket
     {

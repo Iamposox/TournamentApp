@@ -33,9 +33,7 @@ namespace TournamentBracketGenerator.Model
         public string Name { get; set; }
         public string LastName { get; set; }
 
-
         public string FullName { get; set; }
-
 
         public int ID { get; set; }
         public short Weight { get; set; }

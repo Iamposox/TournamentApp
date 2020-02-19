@@ -40,6 +40,7 @@ namespace TournamentBracketGenerator
 
 
         [ComVisible(true)]
+        //Why do we provide same list of Participants in ctor and on this method? does it make any sense ?
         public void GenerateTournamemtBrackets(List<Participant> TotalPartic)
         {
             TotalParticipants = TotalPartic;
@@ -255,6 +256,7 @@ namespace TournamentBracketGenerator
             Participant found = null;
             while (found == null)
             {
+                //WTF??? why not use Next (0 ,participantsFrom.Count )?
                 int id = rnd.Next(1, participantsFrom.Count + 1);
 
                 if (!dest.Any(p => p.RedCorner?.ID == id) && !dest.Any(p => p.BlueCorner?.ID == id))

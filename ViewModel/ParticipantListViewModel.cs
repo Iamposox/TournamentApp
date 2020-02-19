@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using TournamentBracketGenerator;
 using TournamentBracketGenerator.Model;
+using Tournaments.WPF.Model;
 
 namespace Tournaments.WPF.ViewModel
 {
@@ -15,30 +16,16 @@ namespace Tournaments.WPF.ViewModel
         public ICommand AddNewParticipantCommand { get; set; }
         public ICommand RemoveParticipantCommand { get; set; }
 
-        public ObservableCollection<Participant> Participants { get; set; }
+        public ObservableCollection<Participant_Wrapper> Participants { get; set; }
 
         private readonly Manager.StateManager CurrentState;
         public ParticipantListViewModel()
         {
             CurrentState = (Manager.StateManager)App.ServiceContainer.GetService(typeof(Manager.StateManager));
-            SeedCrap();
-
-            Participants = new ObservableCollection<Participant>(CurrentState.CurrentParticipants);
+            Participants = new ObservableCollection<Participant_Wrapper>(CurrentState.CurrentParticipants);
 
         }
 
-        private void SeedCrap()
-        {
-            for (int i = 0; i < 64; i++)
-            {
-                CurrentState.CurrentParticipants.Add(new Participant
-                {
-                    Name = "SomeName",
-                    LastName = "SomeLastName",
-                    Patronymic = "SomePatronymic"
-                });
-            }
-
-        }
+       
     }
 }

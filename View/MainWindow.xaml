@@ -9,18 +9,10 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition MaxWidth="300"/>
+            <ColumnDefinition MaxWidth="200"/>
         </Grid.ColumnDefinitions>
-        <ContentPresenter Grid.Column="0">
-            <ContentPresenter.Content>
-                <local:TournamentUserControl/>
-            </ContentPresenter.Content>
-        </ContentPresenter>
+        <local:TournamentUserControl Grid.Column="0" Grid.Row="0"/>
 
-        <ContentPresenter Grid.Column="1">
-            <ContentPresenter.Content>
-                <local:CurrentParticipantListUserControl/>
-            </ContentPresenter.Content>
-        </ContentPresenter>
+        <local:CurrentParticipantListUserControl Grid.Column="1"/>
     </Grid>
 </Window>

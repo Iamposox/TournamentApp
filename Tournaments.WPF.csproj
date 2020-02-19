@@ -75,6 +75,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Abstract\RelayCommand.cs" />
+    <Compile Include="Control\DiagramCanvas.cs" />
     <Compile Include="Manager\StateManager.cs" />
     <Compile Include="ViewModel\TournamentViewModel.cs" />
     <Compile Include="View\TournamentUserControl.xaml.cs">
@@ -134,9 +135,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Control\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="BracketGenerate\BracketGenerate\BracketGenerate.csproj">
       <Project>{8af1a350-ac9d-4923-b26a-290ef702d9f1}</Project>
