@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\EnumerableHelper.cs" />
     <Compile Include="Model\Bracket.cs" />
     <Compile Include="Model\LastRoundBracket.cs" />
     <Compile Include="Model\Math.cs" />

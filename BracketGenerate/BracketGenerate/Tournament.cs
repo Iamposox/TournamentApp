@@ -185,22 +185,15 @@ namespace TournamentBracketGenerator
             Random rnd = new Random();
             var Id = dest.Union(destTWO).SelectMany(x => new[] { x.BlueCorner?.ID, x.RedCorner?.ID }).ToList();
             var part = participantsFrom.Where(x => !Id.Any(y => y == x.ID)).ToList();
+            //need to be tested for inline return. additionally need to check performance
+            //var test =
+            //    participantsFrom
+            //    .Where(x =>
+            //        !dest.Union(destTWO).SelectMany(d => new[] { d.BlueCorner?.ID, d.RedCorner?.ID }).ToList()
+            //        .Any(y => y == x.ID))
+            //    .ToList()
+            //    .Random();
             return part[rnd.Next(part.Count)];
-            //Participant found = null;
-            //while (found == null)
-            //{
-            //    var id = participantsFrom[rnd.Next(participantsFrom.Count)].ID;
-
-            //    if (!dest.Any(p => p.RedCorner?.ID == id) && !dest.Any(p => p.BlueCorner?.ID == id))
-            //    {
-            //        if (!destTWO.Any(p => p.RedCorner?.ID == id) && !destTWO.Any(p => p.BlueCorner?.ID == id))
-            //        {
-            //            found = participantsFrom.Find(f => f.ID == id);
-            //        }
-            //    }
-
-            //}
-            //return found;
         }
     }
 }

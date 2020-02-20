@@ -1,11 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TournamentBracketGenerator.Helper
 {
+    public static class EnumerableExtensions
+    {
+        public static T Random<T>(this IEnumerable<T> input)
+        {
+            return EnumerableHelper<T>.Random(input);
+        }
+    }
+
     //Please Rename this class. StaticMethods is not saying much about what this class supposed to do
     public static class TournamentCalcHelper
     {
