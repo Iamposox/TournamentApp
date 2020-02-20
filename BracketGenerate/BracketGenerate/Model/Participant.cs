@@ -9,24 +9,15 @@ namespace TournamentBracketGenerator.Model
 {
     public class Participant
     {
-        public Participant() { }
-
-        public Participant(string fullName)
+        public Participant()
         {
-            FullName = fullName;
         }
 
-        public Participant(string fullName, int id)
+        public Participant(string name, string lastName, string patronymic)
         {
-            FullName = fullName;
-            ID = id;
-        }
-
-        public Participant(string fullName, int id, short weight)
-        {
-            FullName = fullName;
-            ID = id;
-            Weight = weight;
+            Name = name;
+            LastName = lastName;
+            Patronymic = patronymic;
         }
 
         public string Patronymic { get; set; }
@@ -34,9 +25,7 @@ namespace TournamentBracketGenerator.Model
         public string LastName { get; set; }
 
         public string FullName { get; set; }
-
-        public int ID { get; set; }
-        public short Weight { get; set; }
-
+        private Guid _ID = Guid.NewGuid();
+        public Guid ID { get => _ID; }
     }
 }
