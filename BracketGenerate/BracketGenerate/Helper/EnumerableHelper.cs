@@ -17,6 +17,5 @@ namespace TournamentBracketGenerator.Helper
         {
             return input.ElementAt(r.Next(input.Count()));
         }
-
     }
 }

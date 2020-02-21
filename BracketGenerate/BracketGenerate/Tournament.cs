@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -18,14 +19,15 @@ namespace TournamentBracketGenerator
             TotalParticipants = totalParticipants;
         }
 
+        //This is unnessecery if you return generated model. It will be easier to use, test and understand
         [ComVisible(true)]
         public List<Participant> TotalParticipants;
         [ComVisible(true)]
-        public List<Bracket> Brackets  = new List<Bracket>();
+        public List<Bracket> Brackets = new List<Bracket>();
         [ComVisible(true)]
         public List<Bracket> PreQualifyBrackets = new List<Bracket>();
         [ComVisible(true)]
-        public List<Round> Rounds  = new List<Round>();
+        public List<Round> Rounds = new List<Round>();
         [ComVisible(true)]
         public LastRoundBracket FinalBracket;
         [ComVisible(true)]
@@ -36,8 +38,14 @@ namespace TournamentBracketGenerator
         private int _tournamentRoundsCount;
         private List<int> _assignedPrequilifiedBracketsId = new List<int>();
 
+        //Use single seed of Random in entier class. Initializing new Random each time you need might create seeding issues
+        private Random rnd = new Random();
+
 
         [ComVisible(true)]
+        //I dont like this personaly. It should return values.
+        //Return values are easier to test and alot easier to understand
+        //currently i am not quite sure what exatcly this crap does and how to use this dll
         public void GenerateTournamemtBrackets()
         {
             // step 1. calculate number of brackets, prequalifier pairs and total rounds in this tournament
@@ -67,7 +75,7 @@ namespace TournamentBracketGenerator
             FillFirstRound();
             AssignSubsequentRounds();
         }
-        //Personaly I prefer Single Line Return 
+
         private void FillPreQualifiers()
         {
             for (int i = 0; i < _preQualifiedBracketsCount; i++)
@@ -76,7 +84,7 @@ namespace TournamentBracketGenerator
                 // get "luckcy" :) prequlifyer for red corner
                 bracket.RedCorner = GetRandomParticipant(TotalParticipants, PreQualifyBrackets, PreQualifyBrackets);
                 PreQualifyBrackets.Add(bracket);
-                bracket.BlueCorner = GetRandomParticipant(TotalParticipants, PreQualifyBrackets, PreQualifyBrackets );
+                bracket.BlueCorner = GetRandomParticipant(TotalParticipants, PreQualifyBrackets, PreQualifyBrackets);
             }
         }
 
@@ -146,18 +154,21 @@ namespace TournamentBracketGenerator
                 }
             }
         }
+
+        //You aint using it...why is it still here ?
         private void AssignRunnerUp()
         {
             ThirdPlace.BlueCorner = Rounds[_tournamentRoundsCount - 1].Brackets[0].RunnerUp;
             ThirdPlace.RedCorner = Rounds[_tournamentRoundsCount - 1].Brackets[1].RunnerUp;
         }
+
         private Bracket GetRandomBracket(List<Bracket> sourse, List<Bracket> dest)
         {
             // if source and dest have same count then return null
-            if (sourse.Count <= _assignedPrequilifiedBracketsId.Count) { return null; };
+            if (sourse.Count <= _assignedPrequilifiedBracketsId.Count)
+                return null;
 
-            Random rnd = new Random();
-            var id = dest.Select(x => x.BracketId).ToList();
+            var id = dest.SelectMany(x => new[] { x.RedCornerBracket?.BracketId, x.BlueCornerBracket?.BracketId }).ToList();
             var list = sourse.Where(x => !id.Any(y => y == x.BracketId)).ToList();
             return list[rnd.Next(list.Count)];
             //while (bracket == null)
@@ -180,20 +191,43 @@ namespace TournamentBracketGenerator
             //}
             //return bracket;
         }
+
+
+        TimeSpan TimeSpanOriginalTimer = new TimeSpan();
+        TimeSpan TimeSpanInlineTimer = new TimeSpan();
+        Stopwatch stopwatch = new Stopwatch();
+        Stopwatch stopwatch2 = new Stopwatch();
+
         private Participant GetRandomParticipant(List<Participant> participantsFrom, List<Bracket> dest, List<Bracket> destTWO)
         {
-            Random rnd = new Random();
+            stopwatch.Start();
             var Id = dest.Union(destTWO).SelectMany(x => new[] { x.BlueCorner?.ID, x.RedCorner?.ID }).ToList();
-            var part = participantsFrom.Where(x => !Id.Any(y => y == x.ID)).ToList();
-            //need to be tested for inline return. additionally need to check performance
-            //var test =
-            //    participantsFrom
-            //    .Where(x =>
-            //        !dest.Union(destTWO).SelectMany(d => new[] { d.BlueCorner?.ID, d.RedCorner?.ID }).ToList()
-            //        .Any(y => y == x.ID))
-            //    .ToList()
-            //    .Random();
-            return part[rnd.Next(part.Count)];
+            var result = participantsFrom.Where(x => !Id.Any(y => y == x.ID)).Random();
+
+            stopwatch.Stop();
+            TimeSpanOriginalTimer= TimeSpanOriginalTimer.Add(stopwatch.Elapsed);
+
+            stopwatch2.Start();
+            GetRandomParticipantTest(participantsFrom, dest, destTWO);
+            stopwatch2.Stop();
+            TimeSpanInlineTimer = TimeSpanInlineTimer.Add(stopwatch2.Elapsed);
+
+            return result;
         }
+
+        private Participant GetRandomParticipantTest
+            (
+                List<Participant> participantsFrom, 
+                List<Bracket> dest, 
+                List<Bracket> destTWO
+            )
+            =>
+                participantsFrom
+                .Where(x =>
+                    !dest.Union(destTWO).SelectMany(d => new[] { d.BlueCorner?.ID, d.RedCorner?.ID }).ToList()
+                    .Any(y => y == x.ID))
+                .ToList()
+                .Random();
+
     }
 }
