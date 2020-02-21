@@ -50,6 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\EnumerableHelper.cs" />
+    <Compile Include="InterfaceExample\CEO.cs" />
+    <Compile Include="InterfaceExample\IWorker.cs" />
+    <Compile Include="InterfaceExample\OfficePlancton.cs" />
+    <Compile Include="InterfaceExample\SoftwareEngeneer.cs" />
+    <Compile Include="InterfaceExample\SomeCompany.cs" />
     <Compile Include="Model\Bracket.cs" />
     <Compile Include="Model\LastRoundBracket.cs" />
     <Compile Include="Model\Math.cs" />
