@@ -19,25 +19,26 @@ namespace Tournaments.WPF.Manager
             CurrentParticipants = new List<Participant_Wrapper>();
             SeedCrap();
 
-
-
             var e = new Tournament(CurrentParticipants.Select(x => x.Model).ToList());
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
             e.GenerateTournamemtBrackets();
-            var duration = stopwatch.Elapsed;
-            MessageBox.Show("Time passed to calculate 64 players : " + duration.ToString($"h'h 'm'm 's's'"));
         }
         private void SeedCrap()
         {
             for (int i = 0; i < 64; i++)
             {
-                CurrentParticipants.Add(new Participant_Wrapper(new Participant()
-                {
-                    Name = "SomeName",
-                    LastName = "SomeLastName",
-                    Patronymic = "SomePatronymic",
-                },i+1));;
+                CurrentParticipants.Add
+                    (
+                        new Participant_Wrapper
+                        (
+                            _participant: new Participant()
+                            {
+                                Name = "SomeName",
+                                LastName = "SomeLastName",
+                                Patronymic = "SomePatronymic",
+                            },
+                            _id:+1
+                        )
+                    );
             }
         }
     }
