@@ -157,7 +157,7 @@ namespace TournamentBracketGenerator
             if (sourse.Count <= _assignedPrequilifiedBracketsId.Count) { return null; };
 
             Random rnd = new Random();
-            var id = dest.SelectMany(x => new[] { x.RedCornerBracket?.BracketId, x.BlueCornerBracket?.BracketId }).ToList();
+            var id = dest.Select(x => x.BracketId).ToList();
             var list = sourse.Where(x => !id.Any(y => y == x.BracketId)).ToList();
             return list[rnd.Next(list.Count)];
             //while (bracket == null)
