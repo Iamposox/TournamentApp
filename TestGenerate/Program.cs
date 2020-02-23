@@ -16,6 +16,7 @@ namespace TestGenerate
         static void Main(string[] args)
         {
             //WHY???????????????
+            //Why are you creating the the Program in Main if main is in programm ?
             var e = new TestGenerate.Program();
             e.generate();
         }
