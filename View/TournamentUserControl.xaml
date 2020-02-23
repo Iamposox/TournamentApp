@@ -15,15 +15,36 @@
     <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
+            <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
 
-        <!--<Button DockPanel.Dock="Bottom" Content="Load" Command="{Binding LoadFileCommand}"/>-->
-        <!--<Button DockPanel.Dock="Bottom" Content="Save" Command="{Binding SaveFileCommand}"/>-->
-        <ScrollViewer>
-            <Control:DiagramCanvas GridLayout="{Binding Grid}">
+        <Button 
+            Grid.Row="1" 
+            Grid.Column="2"
+            Content="Print"
+            CommandParameter="{Binding ElementName=TournamentGrid}"
+            Command="{Binding PrintCanvasCommand}"/>
+
+        <Button 
+            Grid.Row="1" 
+            Grid.Column="1"
+            Content="Save" 
+            Command="{Binding SaveFileCommand}"/>
+        
+        <Button 
+            Grid.Row="1" 
+            Grid.Column="0"
+            Content="Load" 
+            Command="{Binding LoadFileCommand}"/>
+
+
+        <ScrollViewer Grid.ColumnSpan="3" Grid.RowSpan="1">
+            <Control:DiagramCanvas x:Name="TournamentGrid" GridLayout="{Binding Grid}">
             </Control:DiagramCanvas>
         </ScrollViewer>
     </Grid>

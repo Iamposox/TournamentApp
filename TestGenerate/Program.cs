@@ -12,26 +12,46 @@ namespace TestGenerate
     class Program
     {
         public List<Participant_Wrapper> CurrentParticipants { get; set; }
+
         static void Main(string[] args)
         {
+            //WHY???????????????
             var e = new TestGenerate.Program();
             e.generate();
         }
         private void generate()
         {
             Console.WriteLine($"Турнирная таблица 1/32");
+
+            ///Why do you need Wrapper ???
             CurrentParticipants = new List<Participant_Wrapper>();
             SeedCrap();
-            Tournament tour = new Tournament(CurrentParticipants.Select(x => x.Model).ToList());
-            tour.GenerateTournamemtBrackets();
-            for (int i = 0; i < tour.Rounds[0].Brackets.Count; i++)
+
+            //Okay, but why did you used Wrapper and complicated your code ???
+            Tournament CurrentTournament = new Tournament(CurrentParticipants.Select(x => x.Model).ToList());
+
+            // Why didn it do it on ctor ? what the advatage of having it as seperate method?
+            CurrentTournament.GenerateTournamemtBrackets();
+
+            //This looks more like First MatchUp. Running it over "Round" is kind of confusing
+            //in my opinion
+            for (int i = 0; i < CurrentTournament.Rounds[0].Brackets.Count; i++)
             {
-                Console.WriteLine(tour.Rounds[0].Brackets[i].BlueCorner.LastName + " - " + tour.Rounds[0].Brackets[i].RedCorner.LastName);
+                Console.WriteLine(
+                    CurrentTournament.Rounds[0].Brackets[i].BlueCorner.LastName + " - " 
+                    + CurrentTournament.Rounds[0].Brackets[i].RedCorner.LastName);
             }
             Console.WriteLine("1 / 16");
-            for (int i = 0; i < tour.Rounds[1].Brackets.Count; i++)
+            
+            //WATTTTTT?
+            //If I understood correctly you wanted to display {winner of first rounds} are competing with each other?
+            for (int i = 0; i < CurrentTournament.Rounds[1].Brackets.Count; i++)
             {
-                Console.WriteLine(tour.Rounds[1].Brackets[i].BlueCornerBracket.BlueCorner.LastName + "/" + tour.Rounds[1].Brackets[i].BlueCornerBracket.RedCorner.LastName + " - " + tour.Rounds[1].Brackets[i].RedCornerBracket.BlueCorner.LastName + "/" + tour.Rounds[1].Brackets[i].RedCornerBracket.RedCorner.LastName);
+                Console.WriteLine(
+                    CurrentTournament.Rounds[1].Brackets[i].BlueCornerBracket.BlueCorner.LastName + "/"+ 
+                    CurrentTournament.Rounds[1].Brackets[i].BlueCornerBracket.RedCorner.LastName + " - " + 
+                    CurrentTournament.Rounds[1].Brackets[i].RedCornerBracket.BlueCorner.LastName + "/" + 
+                    CurrentTournament.Rounds[1].Brackets[i].RedCornerBracket.RedCorner.LastName);
             }
             
             Console.ReadKey();
