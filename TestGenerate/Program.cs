@@ -15,6 +15,8 @@ namespace TestGenerate
 
         static void Main(string[] args)
         {
+            RoundList matches = new RoundList(new List<IParticipent>());
+
             //WHY???????????????
             //Why are you creating the the Program in Main if main is in programm ?
             var e = new TestGenerate.Program();
