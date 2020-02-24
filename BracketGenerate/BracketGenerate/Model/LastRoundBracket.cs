@@ -11,9 +11,9 @@ namespace TournamentBracketGenerator.Model
 
         private int _bracketRedId;
         private int _bracketBlueId;
-        private Round _round;
+        private RoundList _round;
         private bool _final = true;
-        public LastRoundBracket(Round round, bool final)
+        public LastRoundBracket(RoundList round, bool final)
         {
             _final = final;
             _round = round;
@@ -35,8 +35,8 @@ namespace TournamentBracketGenerator.Model
             _bracketRedId = rnd.Next(0, 1);
             _bracketBlueId = _bracketRedId == 0 ? 1 : 0;
 
-            RedCorner = _round.Brackets[_bracketRedId].Winner;
-            BlueCorner = _round.Brackets[_bracketBlueId].Winner;
+            //RedCorner = _round.Brackets[_bracketRedId].Winner;
+            //BlueCorner = _round.Brackets[_bracketBlueId].Winner;
 
 
         }

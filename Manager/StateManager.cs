@@ -24,7 +24,7 @@ namespace Tournaments.WPF.Manager
             SeedCrap();
 
             var e = new Tournament(CurrentParticipants.Select(x => x.Model).ToList());
-            e.GenerateTournamemtBrackets();
+            //e.GenerateTournamemtBrackets();
         }
         
         public void Print(UIElement _elementToPrint)
