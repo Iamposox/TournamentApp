@@ -27,9 +27,5 @@ namespace TournamentBracketGenerator.Model
         public string FullName { get; set; }
         private Guid _ID = Guid.NewGuid();
         public Guid ID { get => _ID; }
-        public interface IParticipent
-        {
-            string DisplayName { get; set; }
-        }
     }
 }

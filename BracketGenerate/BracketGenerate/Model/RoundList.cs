@@ -32,8 +32,8 @@ namespace TournamentBracketGenerator.Model
         private void Match_WinnerWasSetEvent(object sender, IParticipant _winner)
         {
             WinnersList.Add(_winner);
-            if (/*ensure that all matches are finished*/)
-                RoundEnded.Invoke(this, WinnersList);
+            //if (/*ensure that all matches are finished*/)
+            //    RoundEnded.Invoke(this, WinnersList);
         }
     }
 }

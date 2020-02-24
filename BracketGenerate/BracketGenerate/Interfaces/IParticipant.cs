@@ -8,6 +8,6 @@ namespace BracketGenerate.Interfaces
 {
     public interface IParticipant
     {
-        string DisplayNames { get; set; }
+        string DisplayName { get; set; }
     }
 }

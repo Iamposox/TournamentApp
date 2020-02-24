@@ -32,7 +32,7 @@ namespace TournamentBracketGenerator.Model
         //We need this in order to compair two instances of the Match
         public bool Equals(IGame other)
         {
-            if (RedCorner.DisplayNames == other.RedCorner.DisplayNames)
+            if (RedCorner.DisplayName == other.RedCorner.DisplayName)
                 return true;
             return false;
         }
