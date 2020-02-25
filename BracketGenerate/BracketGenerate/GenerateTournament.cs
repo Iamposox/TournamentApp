@@ -24,13 +24,13 @@ namespace BracketGenerate
             TotalParticipant = totalParticipant;
 
         }
-        public ModelClass LaunchGeneration() 
+        public Tournament LaunchGeneration() 
         {
             CounterOfRounds();
             if (_qualificationPairCount == 0) 
             {
                 FillFirstRound();
-                var e = new ModelClass();
+                var e = new Tournament();
                 e.FirstRounds = Rounds;
                 return e;
             }
@@ -38,7 +38,7 @@ namespace BracketGenerate
             {
                 generateQualifiedRounds();
                 FillFirstRound();
-                var e = new ModelClass();
+                var e = new Tournament();
                 e.FirstRounds = Rounds;
                 return e;
             }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BracketGenerate.NewModel
 {
-    public class ModelClass
+    public class Tournament
     {
         public List<FirstRound> FirstRounds{ get; set; }
     }

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BracketGenerate</RootNamespace>
     <AssemblyName>BracketGenerate</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -69,7 +69,7 @@
     <Compile Include="Model\ParticipantPair.cs" />
     <Compile Include="Model\PreQualifyBracket.cs" />
     <Compile Include="Model\TeamParticipants.cs" />
-    <Compile Include="NewModel\ModelClass.cs" />
+    <Compile Include="NewModel\Tournament.cs" />
     <Compile Include="NewModel\Pair.cs" />
     <Compile Include="NewModel\Participant.cs" />
     <Compile Include="NewModel\FirstRound.cs" />
