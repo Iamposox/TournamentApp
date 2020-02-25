@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BracketGenerate.NewModel
 {
-    public class Participant
+    //Implemented IEquatable Interface in order to provide comparison logic over "==" operator
+    public class Participant:IEquatable<Participant>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -24,5 +25,16 @@ namespace BracketGenerate.NewModel
             FullName = $"{firstName} {lastName} {patronymic}";
         }
         public Participant() { }
+
+        public override int GetHashCode()
+        {
+            return 1213502048 + ID.GetHashCode();
+        }
+
+        public bool Equals(Participant other)
+        {
+            return other is Participant participant &&
+                              ID.Equals(participant.ID);
+        }
     }
 }
