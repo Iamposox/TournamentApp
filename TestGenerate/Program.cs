@@ -17,12 +17,17 @@ namespace TestGenerate
             CurrentParticipants = new List<Participant>();
             SeedCrap();
 
-            var e = new MainClass(CurrentParticipants);
-            e.start();
+            var e = new GenerateTournament(CurrentParticipants);
+            var d = e.LaunchGeneration();
+            for (int i=0; i< e.Rounds.Count; i++) 
+            {
+                Console.WriteLine(d.FirstRounds[i].RedCorner.LastName + "-"+ d.FirstRounds[i].BlueCorner.LastName);
+            }
+            Console.ReadLine();
         }
         private static void SeedCrap()
         {
-            for (int i = 0; i < 63; i++)
+            for (int i = 0; i < 64; i++)
             {
                 CurrentParticipants.Add
                     (

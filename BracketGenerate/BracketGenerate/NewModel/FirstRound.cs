@@ -7,7 +7,7 @@ using TournamentBracketGenerator.Helper;
 
 namespace BracketGenerate.NewModel
 {
-    public class FirstRound:List<Pair>
+    public class FirstRound
     {
         public Pair BlueCornerPair { get; set; }
         public Pair RedCornerPair { get; set; }

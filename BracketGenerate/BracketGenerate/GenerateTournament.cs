@@ -8,7 +8,7 @@ using TournamentBracketGenerator.Helper;
 
 namespace BracketGenerate
 {
-    public class MainClass
+    public class GenerateTournament
     {
         public List<Participant> TotalParticipant = new List<Participant>();
         private int _initialPairCount;
@@ -19,16 +19,29 @@ namespace BracketGenerate
         Random rnd = new Random();
 
         public List<FirstRound> Rounds = new List<FirstRound>();
-        public MainClass(List<Participant> totalParticipant) 
+        public GenerateTournament(List<Participant> totalParticipant) 
         {
             TotalParticipant = totalParticipant;
 
         }
-        public void start() 
+        public ModelClass LaunchGeneration() 
         {
             CounterOfRounds();
-            if (_qualificationPairCount == 0) FillFirstRound();
-            else generateQualifiedRounds(); FillFirstRound();
+            if (_qualificationPairCount == 0) 
+            {
+                FillFirstRound();
+                var e = new ModelClass();
+                e.FirstRounds = Rounds;
+                return e;
+            }
+            else 
+            {
+                generateQualifiedRounds();
+                FillFirstRound();
+                var e = new ModelClass();
+                e.FirstRounds = Rounds;
+                return e;
+            }
         }
         public void CounterOfRounds() 
         {
@@ -39,10 +52,7 @@ namespace BracketGenerate
             _qualificationPairCount = TournamentCalcHelper.CalcPreQualifyPairCount(TotalParticipant.Count);
             //            // get total number of rounds in this tournament
             _roundsCount = TournamentCalcHelper.CalcRounds(_initialPairCount);
-            ////////////////for (int iRound = 1; iRound <= _roundsCount; iRound++)
-            ////////////////{
-            ////////////////    Rounds.Add(new FirstRound() { ID = iRound });
-            ////////////////}
+
         }
         public void generateQualifiedRounds() 
         {

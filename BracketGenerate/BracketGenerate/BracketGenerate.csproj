@@ -61,7 +61,7 @@
     <Compile Include="Interfaces\IParticipant.cs" />
     <Compile Include="Interfaces\IQualified.cs" />
     <Compile Include="Interfaces\IRoundList.cs" />
-    <Compile Include="MainClass.cs" />
+    <Compile Include="GenerateTournament.cs" />
     <Compile Include="Model\Bracket.cs" />
     <Compile Include="Model\LastRoundBracket.cs" />
     <Compile Include="Model\Game.cs" />
@@ -69,6 +69,7 @@
     <Compile Include="Model\ParticipantPair.cs" />
     <Compile Include="Model\PreQualifyBracket.cs" />
     <Compile Include="Model\TeamParticipants.cs" />
+    <Compile Include="NewModel\ModelClass.cs" />
     <Compile Include="NewModel\Pair.cs" />
     <Compile Include="NewModel\Participant.cs" />
     <Compile Include="NewModel\FirstRound.cs" />
