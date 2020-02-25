@@ -22,6 +22,7 @@ namespace Tournaments.WPF
         private void ConfigService(IServiceCollection _services)
         {
             _services.AddSingleton<Manager.StateManager>();
+            _services.AddScoped<Interface.IPrintingService, Service.PrintingService>();
         }
     }
 }

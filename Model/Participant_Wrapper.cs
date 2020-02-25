@@ -6,29 +6,6 @@ using System.Threading.Tasks;
 
 namespace Tournaments.WPF.Model
 {
-    public class CanvasField : Abstract.BaseViewModel
-    {
-        public Cell[,] Field { get; set; } 
-
-        public CanvasField(int _xElements, int _yElements)
-        {
-            Field = new Cell[_xElements, _yElements];
-            for (int x = 0; x < Field.GetLength(0); x++)
-            {
-                for (int y = 0; y < Field.GetLength(1); y++)
-                {
-                    Field[x, y] = new Cell();
-                }
-            }
-        }
-    }
-
-    public class Cell : Abstract.BaseViewModel
-    {
-        public double Height { get; set; } = 50;
-        public double Width { get; set; } = 300;
-    }
-
     /// <summary>
     /// Should be moved to domain layer and replayed with a Participant_Wrapper class
     /// </summary>

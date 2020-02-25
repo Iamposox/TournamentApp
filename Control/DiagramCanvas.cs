@@ -12,16 +12,7 @@ namespace Tournaments.WPF.Control
 {
     public class DiagramCanvas : Canvas
     {
-        public CanvasField GridLayout
-        {
-            get { return (CanvasField)GetValue(GridLayoutProperty); }
-            set 
-            { 
-                SetValue(GridLayoutProperty, value);
-                GenerateField();
-            }
-        }
-
+        #region Dependencies
         public static readonly DependencyProperty GridLayoutProperty =
             DependencyProperty.Register(
                 "GridLayout", 
@@ -35,6 +26,18 @@ namespace Tournaments.WPF.Control
             DiagramCanvas target = (DiagramCanvas)d;
             target.GridLayoutPropertyChanged(target.GridLayout);
         }
+        #endregion
+
+        public CanvasField GridLayout
+        {
+            get { return (CanvasField)GetValue(GridLayoutProperty); }
+            set 
+            { 
+                SetValue(GridLayoutProperty, value);
+                GenerateField();
+            }
+        }
+
         private void GridLayoutPropertyChanged(CanvasField date)
         {
             GridLayout = date;
