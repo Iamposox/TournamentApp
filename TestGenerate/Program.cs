@@ -13,10 +13,19 @@ namespace TestGenerate
     class Program
     {
         public static List<Participant> CurrentParticipants { get; set; }
+        private static int number;
         static async Task Main(string[] args)
         {
             CurrentParticipants = new List<Participant>();
             SeedCrap();
+            var tour = new GenerateTournament(CurrentParticipants);
+            var matches = tour.LaunchGeneration();
+            Console.WriteLine("Выберите пару");
+            number = Convert.ToInt32(Console.ReadLine());
+            var onematch = new Match(matches.FirstRounds[number - 1].BlueCorner, matches.FirstRounds[number - 1].RedCorner);
+            onematch.EndMatch += EndMatches;
+            onematch.SetWinnerOfThePair(matches.FirstRounds[number-1].RedCorner);
+            #region task 
             var Matches = SetPairs(CurrentParticipants);
             await Task.Run(async () =>
             {
@@ -30,6 +39,7 @@ namespace TestGenerate
                     //Changes in the Pair List states
                 }
             });
+            #endregion
             #region something
             var e = new GenerateTournament(CurrentParticipants);
             var d = e.LaunchGeneration();
@@ -42,8 +52,11 @@ namespace TestGenerate
             Console.ReadLine();
             #endregion
         }
-
-        private static void AssignedRandomMatchWinner(List<Pair> _matches)
+        public static void EndMatches(object sender, Participant participant)
+        {
+            Console.WriteLine($"Победитель в паре {number} {participant.FullName}");
+        }
+        private static void AssignedRandomMatchWinner(List<Match> _matches)
         {
             Random Rnd = new Random();
             Task.Run(async () =>
@@ -55,12 +68,12 @@ namespace TestGenerate
             });
         }
 
-        private static List<Pair> SetPairs(List<Participant> _users)
+        private static List<Match> SetPairs(List<Participant> _users)
         {
-            var result = new List<Pair>();
+            var result = new List<Match>();
             for (int i = 0; i < _users.Count; i += 2)
             {
-                result.Add(new Pair() { RedCorner = _users[i], BlueCorner = _users[i + 1] });
+                result.Add(new Match() { RedCorner = _users[i], BlueCorner = _users[i + 1] });
             }
             return result;
 
@@ -77,11 +90,11 @@ namespace TestGenerate
             {
                 CurrentParticipants.Add
                     (
-                       new Participant()
+                       new Participant("SomeName", "SomeLastName", "SomePatronymic")
                        {
-                           FirstName = "SomeName",
-                           LastName = "SomeLastName",
-                           Patronymic = "SomePatronymic",
+                           //FirstName = "SomeName",
+                           //LastName = "SomeLastName",
+                           //Patronymic = "SomePatronymic",
                        }
                     );
             }

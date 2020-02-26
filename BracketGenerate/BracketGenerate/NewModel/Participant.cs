@@ -21,9 +21,12 @@ namespace BracketGenerate.NewModel
             FirstName = firstName;
             LastName = lastName;
             Patronymic = patronymic;
-            FullName = $"{firstName} {lastName} {patronymic}";
+            FullName = $"{lastName} {firstName} {patronymic}";
         }
-        public Participant() { }
+        public Participant() 
+        {
+            FullName = $"{LastName} {FirstName} {Patronymic}";
+        }
 
         //public override bool Equals(object obj)
         //{

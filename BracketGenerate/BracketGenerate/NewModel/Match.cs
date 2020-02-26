@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BracketGenerate.NewModel
 {
-    public class Pair
+    public delegate void MatchEndedDelegate(object sender, Participant _winner); 
+    public class Match
     {
         public Participant BlueCorner { get; set; }
         public Participant RedCorner { get; set; }
@@ -15,8 +16,8 @@ namespace BracketGenerate.NewModel
         //Doesnt need to hold objects of next pair
         //Also it doesnt make sense that it hold two pairs.
         //Please decribe the logic
-        public Pair BlueCornerPair { get; set; }
-        public Pair RedCornerPair { get; set; }
+        public Match BlueCornerPair { get; set; }
+        public Match RedCornerPair { get; set; }
 
         //use this type of comments please
         /// <summary>
@@ -24,10 +25,9 @@ namespace BracketGenerate.NewModel
         /// </summary>
         public int ID { get; set; }
 
-
         //see this is why Match would sound better
         private Participant m_PairWinner;
-
+        public event MatchEndedDelegate EndMatch;
         //Match again would sound better
         /// <summary>
         /// Sets the winner of the current pair
@@ -42,9 +42,16 @@ namespace BracketGenerate.NewModel
             if (BlueCorner == _participant || RedCorner == _participant)
             {
                 m_PairWinner = _participant;
+                EndMatch.Invoke(this, _participant);
                 return true;
             }
             return false;
+        }
+        public Match() { }
+        public Match(Participant one, Participant two) 
+        {
+            BlueCorner = one;
+            RedCorner = two;
         }
     }
 }

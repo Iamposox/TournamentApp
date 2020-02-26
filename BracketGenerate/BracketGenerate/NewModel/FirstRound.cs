@@ -9,8 +9,8 @@ namespace BracketGenerate.NewModel
 {
     public class FirstRound
     {
-        public Pair BlueCornerPair { get; set; }
-        public Pair RedCornerPair { get; set; }
+        public Match BlueCornerPair { get; set; }
+        public Match RedCornerPair { get; set; }
         public Participant BlueCorner { get; set; }
         public Participant RedCorner { get; set; }
         public int ID { get; set; }

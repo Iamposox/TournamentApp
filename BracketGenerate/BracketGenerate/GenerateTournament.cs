@@ -14,7 +14,7 @@ namespace BracketGenerate
         private int _initialPairCount;
         private int _qualificationPairCount;
         private int _roundsCount;
-        public List<Pair> PreQualifyBrackets = new List<Pair>();
+        public List<Match> PreQualifyBrackets = new List<Match>();
         private List<int> _assignedPrequilifiedBracketsId = new List<int>();
         Random rnd = new Random();
 
@@ -58,7 +58,7 @@ namespace BracketGenerate
         {
             for (int i = 0; i < _qualificationPairCount; i++)
             {
-                var bracket = new Pair() { ID = PreQualifyBrackets.Count + 1 };
+                var bracket = new Match() { ID = PreQualifyBrackets.Count + 1 };
                 // get "luckcy" :) prequlifyer for red corner
                 bracket.RedCorner = GetRandomParticipantTest(TotalParticipant, PreQualifyBrackets, PreQualifyBrackets);
                 bracket.BlueCorner = GetRandomParticipantTest(TotalParticipant, PreQualifyBrackets, PreQualifyBrackets);
@@ -104,8 +104,8 @@ namespace BracketGenerate
         private Participant GetRandomParticipantTest
             (
                 List<Participant> participantsFrom,
-                List<Pair> dest,
-                List<Pair> destTWO
+                List<Match> dest,
+                List<Match> destTWO
             )
             =>
                 participantsFrom
@@ -114,12 +114,12 @@ namespace BracketGenerate
                     .Any(y => y == x.ID))
                 .ToList()
                 .Random();
-        public Pair GetRandomBracketTest(List<Pair> source, List<FirstRound> dest, List<int> _countId) => (source.Count <= _countId.Count) ? null : source
+        public Match GetRandomBracketTest(List<Match> source, List<FirstRound> dest, List<int> _countId) => (source.Count <= _countId.Count) ? null : source
             .Where(x =>
                 !dest.SelectMany(d => new[] { d.RedCornerPair?.ID, d.BlueCornerPair.ID})
                 .Any(y => y == x.ID))
             .ToList().Random();
-        private Pair GetRandomBracket(List<Pair> sourse, List<FirstRound> dest)
+        private Match GetRandomBracket(List<Match> sourse, List<FirstRound> dest)
         {
             // if source and dest have same count then return null
             if (sourse.Count <= _assignedPrequilifiedBracketsId.Count)
