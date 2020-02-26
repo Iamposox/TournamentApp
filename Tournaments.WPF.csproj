@@ -81,7 +81,11 @@
     <Compile Include="Model\CanvasField.cs" />
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Service\PrintingService.cs" />
+    <Compile Include="ViewModel\ParticipaneManamentControllViewModel.cs" />
     <Compile Include="ViewModel\TournamentViewModel.cs" />
+    <Compile Include="View\ParticipantManagementControl.xaml.cs">
+      <DependentUpon>ParticipantManagementControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TournamentUserControl.xaml.cs">
       <DependentUpon>TournamentUserControl.xaml</DependentUpon>
     </Compile>
@@ -107,6 +111,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ParticipantManagementControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\TournamentUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

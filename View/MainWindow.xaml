@@ -7,9 +7,6 @@
         xmlns:VM="clr-namespace:Tournaments.WPF.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Window.DataContext>
-        <VM:TestMainTab/>
-    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -21,21 +18,7 @@
         </Grid.RowDefinitions>
         <local:TournamentUserControl Grid.Column="0" Grid.Row="0"/>
 
+        <local:ParticipantManagementControl Grid.Column="0" Grid.Row="1"/>
         <local:CurrentParticipantListUserControl Grid.Column="1"/>
-        <TabControl
-            DataContext="{Binding MyProperty}"
-            Grid.Row="1" 
-            VerticalAlignment="Stretch">
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5">
-                    <TextBlock Text="{Binding}"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5">
-                    <TextBlock Text="{Binding}"/>
-                </Grid>
-            </TabItem>
-        </TabControl>
     </Grid>
 </Window>

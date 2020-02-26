@@ -10,11 +10,6 @@ using Tournaments.WPF.Model;
 
 namespace Tournaments.WPF.ViewModel
 {
-    public class TestMainTab
-    {
-        public List<string> MyProperty { get; set; }
-
-    }
     public class TournamentViewModel : Abstract.BaseViewModel
     {
         public ICommand PrintCanvasCommand { get => new RelayCommand<object>(PrintCanvas); }
