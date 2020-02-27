@@ -69,6 +69,7 @@
     <Compile Include="Model\ParticipantPair.cs" />
     <Compile Include="Model\PreQualifyBracket.cs" />
     <Compile Include="Model\TeamParticipants.cs" />
+    <Compile Include="NewModel\Team.cs" />
     <Compile Include="NewModel\Tournament.cs" />
     <Compile Include="NewModel\Match.cs" />
     <Compile Include="NewModel\Participant.cs" />
