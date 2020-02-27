@@ -13,18 +13,21 @@ namespace TestGenerate
     class Program
     {
         public static List<Participant> CurrentParticipants { get; set; }
-        private static int number;
+        private static int number, i;
         static async Task Main(string[] args)
         {
             CurrentParticipants = new List<Participant>();
             SeedCrap();
             var tour = new GenerateTournament(CurrentParticipants);
             var matches = tour.LaunchGeneration();
-            Console.WriteLine("Выберите пару");
-            number = Convert.ToInt32(Console.ReadLine());
-            var onematch = new Match(matches.FirstRounds[number - 1].BlueCorner, matches.FirstRounds[number - 1].RedCorner);
-            onematch.EndMatch += EndMatches;
-            onematch.SetWinnerOfThePair(matches.FirstRounds[number-1].RedCorner);
+            var firstmatches = matches.FirstRounds;
+            for(i=0; i < firstmatches.Count; i++) 
+            {
+                firstmatches[i].EndMatch += EndMatches;
+                firstmatches[i].SetWinnerOfThePair(matches.FirstRounds[i].RedCorner);
+            }
+            matches.EndRounds += EndRounds;
+            matches.FillRounds();
             #region task 
             var Matches = SetPairs(CurrentParticipants);
             await Task.Run(async () =>
@@ -54,7 +57,11 @@ namespace TestGenerate
         }
         public static void EndMatches(object sender, Participant participant)
         {
-            Console.WriteLine($"Победитель в паре {number} {participant.FullName}");
+            Console.WriteLine($"Победитель в паре {i} {participant.FullName}");
+        }
+        public static void EndRounds(object sender)
+        {
+            Console.WriteLine($"Все победители в раунде назначены");
         }
         private static void AssignedRandomMatchWinner(List<Match> _matches)
         {
@@ -64,7 +71,7 @@ namespace TestGenerate
                 await Task.Delay(200);
                 Console.WriteLine("200 passed");
                 int index = Rnd.Next(_matches.Count);
-                _matches[index].SetWinnerOfThePair(_matches[index].RedCorner);
+                //_matches[index].SetWinnerOfThePair(_matches[index].RedCorner);
             });
         }
 

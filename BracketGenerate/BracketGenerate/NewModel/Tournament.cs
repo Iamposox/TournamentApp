@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace BracketGenerate.NewModel
 {
+    public delegate void EndRounds(object sender);
     public class Tournament
     {
         public List<FirstRound> FirstRounds{ get; set; }
+        public event EndRounds EndRounds;
+        public void FillRounds() 
+        {
+            EndRounds.Invoke(this);
+        }
     }
 }
