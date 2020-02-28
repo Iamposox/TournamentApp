@@ -27,8 +27,8 @@ namespace TestGenerate
             var firstTeamMatches = matchesTeam.FirstRounds;
             for (i = 0; i < firstTeamMatches.Count; i++) 
             {
-                firstTeamMatches[i].EndMatch += EndMatches;
-                firstTeamMatches[i].SetWinnerOfThePair(matchesTeam.FirstRounds[i].RedCorner);
+                firstTeamMatches[i].EndMatchTeamUnion += EndMatches;
+                firstTeamMatches[i].SetWinnerOfThePair(matchesTeam.FirstRounds[i].UnionRed);
 
             }
             matchesTeam.EndRounds += EndRounds;
@@ -74,6 +74,14 @@ namespace TestGenerate
         public static void EndMatches(object sender, Participant participant)
         {
             Console.WriteLine($"Победитель в паре {i} {participant.FullName}");
+        }
+        public static void EndMatches(object sender, Team team)
+        {
+            Console.WriteLine($"Победитель в паре {i} {team.TeamName}");
+        }
+        public static void EndMatches(object sender, TeamUnion teamUni)
+        {
+            Console.WriteLine($"Победитель в паре {i} {teamUni.TeamOne.TeamName}");
         }
         public static void EndRounds(object sender)
         {

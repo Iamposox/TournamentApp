@@ -8,6 +8,8 @@ using TournamentBracketGenerator.Helper;
 namespace BracketGenerate.NewModel
 {
     public delegate void MatchEndedDelegate(object sender, Participant _winner);
+    public delegate void MatchTeamEndedDelegate(object sender, Team _winner);
+    public delegate void MatchTeamUnionEndedDelegate(object sender, TeamUnion _winner);
     public class FirstRound
     {
         public Match BlueCornerPair { get; set; }
@@ -20,7 +22,11 @@ namespace BracketGenerate.NewModel
         public TeamUnion UnionRed { get; set; }
         public int ID { get; set; }
         public event MatchEndedDelegate EndMatch;
+        public event MatchTeamEndedDelegate EndMatchTeam;
+        public event MatchTeamUnionEndedDelegate EndMatchTeamUnion;
         private Participant m_PairWinner;
+        private Team m_PairTeamWinner;
+        private TeamUnion m_PairTeamUniWinner;
         //Match again would sound better
         /// <summary>
         /// Sets the winner of the current pair
@@ -36,6 +42,28 @@ namespace BracketGenerate.NewModel
             {
                 m_PairWinner = _participant;
                 EndMatch.Invoke(this, _participant);
+                return true;
+            }
+            return false;
+        }
+        public bool SetWinnerOfThePair(Team team)
+        {
+            //See Participant class for the comparison logic
+            if (BlueCornerTeam == team || RedCornerTeam == team)
+            {
+                m_PairTeamWinner = team;
+                EndMatchTeam.Invoke(this, team);
+                return true;
+            }
+            return false;
+        }
+        public bool SetWinnerOfThePair(TeamUnion teamUni)
+        {
+            //See Participant class for the comparison logic
+            if (UnionBlue == teamUni|| UnionRed == teamUni)
+            {
+                m_PairTeamUniWinner = teamUni;
+                EndMatchTeamUnion.Invoke(this, teamUni);
                 return true;
             }
             return false;
