@@ -13,13 +13,28 @@ namespace TestGenerate
     class Program
     {
         public static List<Participant> CurrentParticipants { get; set; }
-        private static int number, i;
+        public static List<Team> CurrentTeam { get; set; }
+        private static int i;
         static async Task Main(string[] args)
         {
+            CurrentTeam = new List<Team>();
             CurrentParticipants = new List<Participant>();
             SeedCrap();
+            SeedTeam();
+            var tournament = new GenerateTournament(CurrentTeam);
+            var matchesTeam = tournament.LaunchGenerationForTeams();
+            var firstTeamMatches = matchesTeam.FirstRounds;
+            for (i = 0; i < firstTeamMatches.Count; i++) 
+            {
+                firstTeamMatches[i].EndMatch += EndMatches;
+                firstTeamMatches[i].SetWinnerOfThePair(matchesTeam.FirstRounds[i].RedCorner);
+
+            }
+            matchesTeam.EndRounds += EndRounds;
+            matchesTeam.FillRounds();
+            SeedCrap();
             var tour = new GenerateTournament(CurrentParticipants);
-            var matches = tour.LaunchGeneration();
+            var matches = tour.LaunchGenerationForParticipant();
             var firstmatches = matches.FirstRounds;
             for(i=0; i < firstmatches.Count; i++) 
             {
@@ -45,7 +60,7 @@ namespace TestGenerate
             #endregion
             #region something
             var e = new GenerateTournament(CurrentParticipants);
-            var d = e.LaunchGeneration();
+            var d = e.LaunchGenerationForParticipant();
             for (int i = 0; i < e.Rounds.Count; i++)
             {
                 Console.WriteLine(d.FirstRounds[i].RedCorner.LastName + "-" + d.FirstRounds[i].BlueCorner.LastName);
@@ -90,10 +105,20 @@ namespace TestGenerate
         {
             Console.WriteLine(_winner.FirstName);
         }
-
+        private static void SeedTeam() 
+        {
+            for(int i = 0; i < 64; i++) 
+            {
+                CurrentTeam.Add(new Team()
+                {
+                    TeamName = "SomeTeamName"+i.ToString(),
+                    TeamMember = CurrentParticipants
+                });
+            }
+        }
         private static void SeedCrap()
         {
-            for (int i = 0; i < 64; i++)
+            for (int i = 0; i < 5; i++)
             {
                 CurrentParticipants.Add
                     (

@@ -10,6 +10,8 @@ namespace BracketGenerate.NewModel
     {
         public Participant BlueCorner { get; set; }
         public Participant RedCorner { get; set; }
+        public Team BlueCornerTeam { get; set; }
+        public Team RedCornerTeam { get; set; }
 
         //Class Pair (even tho i am convice that Match is better name
         //Doesnt need to hold objects of next pair

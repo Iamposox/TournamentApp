@@ -9,7 +9,7 @@ namespace BracketGenerate.NewModel
     public class Team
     {
         public string TeamName { get; set; }
-        public List<Participant> ParticipantName { get; set; }
+        public List<Participant> TeamMember { get; set; }
         private Guid _guid => Guid.NewGuid();
         public Guid ID { get => _guid; }
     }

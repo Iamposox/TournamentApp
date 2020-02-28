@@ -14,6 +14,8 @@ namespace BracketGenerate.NewModel
         public Match RedCornerPair { get; set; }
         public Participant BlueCorner { get; set; }
         public Participant RedCorner { get; set; }
+        public Team BlueCornerTeam { get; set; }
+        public Team RedCornerTeam { get; set; }
         public int ID { get; set; }
         public event MatchEndedDelegate EndMatch;
         private Participant m_PairWinner;
