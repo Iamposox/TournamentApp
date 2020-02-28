@@ -39,7 +39,7 @@ namespace BracketGenerate
         //{
         //    teamUni = TeamUnion;
         //}
-        public Tournament LaunchGenerationForParticipant() 
+        public Tournament LaunchGeneration() 
         {
             CounterOfRounds(TotalParticipant);
             if (_qualificationPairCount == 0) 
@@ -272,13 +272,13 @@ namespace BracketGenerate
                 .Random();
 
 
-        private Team GetRandomTeams(List<Team> teams, List<Match> dest,
-                List<Match> destTWO) => teams
-            .Where(x =>
-                !dest.Union(destTWO).SelectMany(d => new[] { d.BlueCorner?.ID, d.RedCorner?.ID }).ToList()
-                .Any(y => y == x.ID))
-            .ToList()
-            .Random();
+        //private Team GetRandomTeams(List<Team> teams, List<Match> dest,
+        //        List<Match> destTWO) => teams
+        //    .Where(x =>
+        //        !dest.Union(destTWO).SelectMany(d => new[] { d.BlueCorner?.ID, d.RedCorner?.ID }).ToList()
+        //        .Any(y => y == x.ID))
+        //    .ToList()
+        //    .Random();
 //totally dont need that
         //private TeamUnion GetRandomTeamUnion(List<TeamUnion> teamUni, List<Match> dest, List<Match> destTWO) => teamUni
         //    .Where(x =>
@@ -286,6 +286,7 @@ namespace BracketGenerate
         //        .Any(y => y == x.ID))
         //    .ToList()
         //    .Random();
+
         public Match GetRandomBracketTest(List<Match> source, List<FirstRound> dest, List<int> _countId) => (source.Count <= _countId.Count) ? null : source
             .Where(x =>
                 !dest.SelectMany(d => new[] { d.RedCornerPair?.ID, d.BlueCornerPair.ID})

@@ -11,10 +11,10 @@ namespace BracketGenerate.NewModel
     {
         public IParticipant BlueCorner { get; set; }
         public IParticipant RedCorner { get; set; }
-        public Team BlueCornerTeam { get; set; }
-        public Team RedCornerTeam { get; set; }
-        public TeamUnion UnionBlue { get; set; }
-        public TeamUnion UnionRed { get; set; }
+        //public Team BlueCornerTeam { get; set; }
+        //public Team RedCornerTeam { get; set; }
+        //public TeamUnion UnionBlue { get; set; }
+        //public TeamUnion UnionRed { get; set; }
         //Class Pair (even tho i am convice that Match is better name
         //Doesnt need to hold objects of next pair
         //Also it doesnt make sense that it hold two pairs.

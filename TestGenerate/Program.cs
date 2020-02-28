@@ -5,37 +5,31 @@ using BracketGenerate;
 using System.Linq;
 using BracketGenerate.NewModel;
 using System.Threading.Tasks;
+using BracketGenerate.Interface;
 
 namespace TestGenerate
 {
     class Program
     {
-        public static List<Participant> CurrentParticipants { get; set; }
-        public static List<Team> CurrentTeam { get; set; }
-        public static List<TeamUnion> CurTeam { get; set; }
+        public static List<IParticipant> CurrentParticipants { get; set; } = new List<IParticipant>();
         private static int i;
         static async Task Main(string[] args)
         {
-            CurTeam = new List<TeamUnion>();
-            CurrentTeam = new List<Team>();
-            CurrentParticipants = new List<Participant>();
             SeedCrap();
-            SeedTeam();
-            SeedTeamUnion();
-            var tournament = new GenerateTournament(CurTeam);
-            var matchesTeam = tournament.LaunchGenerationForUnion();
+            var tournament = new GenerateTournament(CurrentParticipants);
+            var matchesTeam = tournament.LaunchGeneration();
             var firstTeamMatches = matchesTeam.FirstRounds;
             for (i = 0; i < firstTeamMatches.Count; i++) 
             {
-                firstTeamMatches[i].EndMatchTeamUnion += EndMatches;
-                firstTeamMatches[i].SetWinnerOfThePair(matchesTeam.FirstRounds[i].UnionRed);
+                firstTeamMatches[i].EndMatch += EndMatches;
+                firstTeamMatches[i].SetWinnerOfThePair(matchesTeam.FirstRounds[i].RedCorner);
 
             }
             matchesTeam.EndRounds += EndRounds;
             matchesTeam.FillRounds();
             SeedCrap();
             var tour = new GenerateTournament(CurrentParticipants);
-            var matches = tour.LaunchGenerationForParticipant();
+            var matches = tour.LaunchGeneration();
             var firstmatches = matches.FirstRounds;
             for(i=0; i < firstmatches.Count; i++) 
             {
@@ -61,28 +55,28 @@ namespace TestGenerate
             #endregion
             #region something
             var e = new GenerateTournament(CurrentParticipants);
-            var d = e.LaunchGenerationForParticipant();
+            var d = e.LaunchGeneration();
             for (int i = 0; i < e.Rounds.Count; i++)
             {
-                Console.WriteLine(d.FirstRounds[i].RedCorner.LastName + "-" + d.FirstRounds[i].BlueCorner.LastName);
+                Console.WriteLine(d.FirstRounds[i].RedCorner.DisplayName() + "-" + d.FirstRounds[i].BlueCorner.DisplayName());
             }
 
 
             Console.ReadLine();
             #endregion
         }
-        public static void EndMatches(object sender, Participant participant)
+        public static void EndMatches(object sender, IParticipant participant)
         {
-            Console.WriteLine($"Победитель в паре {i} {participant.FullName}");
+            Console.WriteLine($"Победитель в паре {i} {participant.DisplayDetailedName()}");
         }
-        public static void EndMatches(object sender, Team team)
-        {
-            Console.WriteLine($"Победитель в паре {i} {team.TeamName}");
-        }
-        public static void EndMatches(object sender, TeamUnion teamUni)
-        {
-            Console.WriteLine($"Победитель в паре {i} {teamUni.TeamOne.TeamName}");
-        }
+       // public static void EndMatches(object sender, Team team)
+       // {
+       //     Console.WriteLine($"Победитель в паре {i} {team.TeamName}");
+       // }
+       // public static void EndMatches(object sender, TeamUnion teamUni)
+       // {
+       //     Console.WriteLine($"Победитель в паре {i} {teamUni.TeamOne.TeamName}");
+       // }
         public static void EndRounds(object sender)
         {
             Console.WriteLine($"Все победители в раунде назначены");
@@ -99,7 +93,7 @@ namespace TestGenerate
             });
         }
 
-        private static List<Match> SetPairs(List<Participant> _users)
+        private static List<Match> SetPairs(List<IParticipant> _users)
         {
             var result = new List<Match>();
             for (int i = 0; i < _users.Count; i += 2)
@@ -115,29 +109,29 @@ namespace TestGenerate
             Console.WriteLine(_winner.FirstName);
         }
         
-        public static void SeedTeamUnion() 
-        {
-            for (int i=0;i<64; i++) 
-            {
-                CurTeam.Add(new TeamUnion()
-                {
-                    TeamOne = CurrentTeam[i],
-                    TeamTwo = CurrentTeam[i+1]
-                });
-                i++;
-            }
-        }
-        private static void SeedTeam() 
-        {
-            for(int i = 0; i < 64; i++) 
-            {
-                CurrentTeam.Add(new Team()
-                {
-                    TeamName = "SomeTeamName"+i.ToString(),
-                    TeamMember = CurrentParticipants
-                });
-            }
-        }
+       //public static void SeedTeamUnion() 
+       //{
+       //    for (int i=0;i<64; i++) 
+       //    {
+       //        CurTeam.Add(new TeamUnion()
+       //        {
+       //            TeamOne = CurrentTeam[i],
+       //            TeamTwo = CurrentTeam[i+1]
+       //        });
+       //        i++;
+       //    }
+       //}
+       //private static void SeedTeam() 
+       //{
+       //    for(int i = 0; i < 64; i++) 
+       //    {
+       //        CurrentTeam.Add(new Team()
+       //        {
+       //            TeamName = "SomeTeamName"+i.ToString(),
+       //            TeamMember = CurrentParticipants
+       //        });
+       //    }
+       //}
         private static void SeedCrap()
         {
             for (int i = 0; i < 5; i++)
