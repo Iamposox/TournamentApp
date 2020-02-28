@@ -55,8 +55,8 @@
     <Compile Include="InterfaceExample\OfficePlancton.cs" />
     <Compile Include="InterfaceExample\SoftwareEngeneer.cs" />
     <Compile Include="InterfaceExample\SomeCompany.cs" />
-    <Compile Include="InterfaceExample\UglyExample.cs" />
     <Compile Include="GenerateTournament.cs" />
+    <Compile Include="Interface\IParticipant.cs" />
     <Compile Include="NewModel\Team.cs" />
     <Compile Include="NewModel\TeamUnion.cs" />
     <Compile Include="NewModel\Tournament.cs" />

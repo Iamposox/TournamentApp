@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace BracketGenerate.NewModel
 {
-    public class TeamUnion
-    {
-        public Team TeamOne { get; set; }
-        public Team TeamTwo { get; set; }
-        private Guid _ID = Guid.NewGuid();
-        public Guid ID { get => _ID; }
-    }
+    //We dont need it because the Team class is managable to have a collection of team
+
+    //public class TeamUnion : Interface.IParticipant
+    //{
+    //    public Team TeamOne { get; set; }
+    //    public Team TeamTwo { get; set; }
+    //    private Guid _ID = Guid.NewGuid();
+    //    public Guid ID { get => _ID; }
+    //}
 }

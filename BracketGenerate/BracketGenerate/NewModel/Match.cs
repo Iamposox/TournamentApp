@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BracketGenerate.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,8 @@ namespace BracketGenerate.NewModel
 {
     public class Match
     {
-        public Participant BlueCorner { get; set; }
-        public Participant RedCorner { get; set; }
+        public IParticipant BlueCorner { get; set; }
+        public IParticipant RedCorner { get; set; }
         public Team BlueCornerTeam { get; set; }
         public Team RedCornerTeam { get; set; }
         public TeamUnion UnionBlue { get; set; }

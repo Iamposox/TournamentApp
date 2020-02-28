@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BracketGenerate.NewModel
 {
-    public class Participant : IEquatable<Participant>
+    public class Participant : IEquatable<Participant>,Interface.IParticipant
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -28,13 +28,6 @@ namespace BracketGenerate.NewModel
             FullName = $"{LastName} {FirstName} {Patronymic}";
         }
 
-        //public override bool Equals(object obj)
-        //{
-        //    if (obj is Participant)
-        //        return Equals((Participant)obj);
-        //    return false;
-        //}
-
         public override int GetHashCode()
         {
             return 1213502048 + ID.GetHashCode();
@@ -45,5 +38,9 @@ namespace BracketGenerate.NewModel
             return other is Participant participant &&
                               ID.Equals(participant.ID);
         }
+
+        public string DisplayName() => FirstName;
+
+        public string DisplayDetailedName() => $"{FirstName} {Patronymic} {LastName}";
     }
 }
