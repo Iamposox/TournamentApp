@@ -10,5 +10,7 @@ namespace BracketGenerate.NewModel
     {
         public Team TeamOne { get; set; }
         public Team TeamTwo { get; set; }
+        private Guid _ID = Guid.NewGuid();
+        public Guid ID { get => _ID; }
     }
 }

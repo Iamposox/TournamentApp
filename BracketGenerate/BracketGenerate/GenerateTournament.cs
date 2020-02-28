@@ -17,6 +17,7 @@ namespace BracketGenerate
         public List<Match> PreQualifyBrackets = new List<Match>();
         private List<int> _assignedPrequilifiedBracketsId = new List<int>();
         public List<Team> teams = new List<Team>();
+        public List<TeamUnion> teamUni= new List<TeamUnion>();
         Random rnd = new Random();
 
         public List<FirstRound> Rounds = new List<FirstRound>();
@@ -27,6 +28,10 @@ namespace BracketGenerate
         public GenerateTournament(List<Team> totalTeam) 
         {
             teams = totalTeam;
+        }
+        public GenerateTournament(List<TeamUnion> TeamUnion)
+        {
+            teamUni = TeamUnion;
         }
         public Tournament LaunchGenerationForParticipant() 
         {
@@ -66,6 +71,25 @@ namespace BracketGenerate
                 return e;
             }
         }
+        public Tournament LaunchGenerationForUnion() 
+        {
+            CounterOfRounds(teamUni);
+            if(_qualificationPairCount == 0) 
+            {
+                FillFirstRound(teamUni);
+                var e = new Tournament();
+                e.FirstRounds = Rounds;
+                return e;
+            }
+            else 
+            {
+                generateQualifiedRounds(teamUni);
+                FillFirstRound(teamUni);
+                var e = new Tournament();
+                e.FirstRounds = Rounds;
+                return e;
+            }
+        }
         public void CounterOfRounds<T>(List<T> sender) 
         {
             // step 1. calculate number of brackets, prequalifier pairs and total rounds in this tournament
@@ -96,6 +120,17 @@ namespace BracketGenerate
                 // get "luckcy" :) prequlifyer for red corner
                 bracket.RedCornerTeam = GetRandomTeams(teams, PreQualifyBrackets, PreQualifyBrackets);
                 bracket.BlueCornerTeam = GetRandomTeams(teams, PreQualifyBrackets, PreQualifyBrackets);
+                PreQualifyBrackets.Add(bracket);
+            }
+        }
+        public void generateQualifiedRounds(List<TeamUnion> teams)
+        {
+            for (int i = 0; i < _qualificationPairCount; i++)
+            {
+                var bracket = new Match() { ID = PreQualifyBrackets.Count + 1 };
+                // get "luckcy" :) prequlifyer for red corner
+                bracket.UnionRed = GetRandomTeamUnion(teams, PreQualifyBrackets, PreQualifyBrackets);
+                bracket.UnionBlue = GetRandomTeamUnion(teams, PreQualifyBrackets, PreQualifyBrackets);
                 PreQualifyBrackets.Add(bracket);
             }
         }
@@ -171,6 +206,42 @@ namespace BracketGenerate
                 }
             }
         }
+        private void FillFirstRound(List<TeamUnion> teams)
+        {
+            var round = Rounds.Find(r => r.ID == 1);
+
+            for (int count = 0; count < _initialPairCount; count++)
+            {
+                var randomBracket = GetRandomBracket(PreQualifyBrackets, Rounds);
+
+                var bracket = new FirstRound() { ID = Rounds.Count + 1 };
+                // add new bracket to round
+                Rounds.Add(bracket);
+                // if we have bracket use bracket winner else use participants who didn't need qualification
+                // red corner
+                if (randomBracket != null)
+                {
+                    bracket.RedCornerPair = randomBracket;
+                    _assignedPrequilifiedBracketsId.Add(randomBracket.ID);
+                }
+                else
+                {
+                    bracket.UnionRed = GetRandomTeamUnion(teams, PreQualifyBrackets, PreQualifyBrackets);
+                }
+                // blue corner
+                randomBracket = GetRandomBracket(PreQualifyBrackets, Rounds);
+                if (randomBracket != null)
+                {
+                    bracket.BlueCornerPair = randomBracket;
+                    _assignedPrequilifiedBracketsId.Add(randomBracket.ID);
+
+                }
+                else
+                {
+                    bracket.UnionBlue = GetRandomTeamUnion(teams, PreQualifyBrackets, PreQualifyBrackets);
+                }
+            }
+        }
         private Participant GetRandomParticipantTest
             (
                 List<Participant> participantsFrom,
@@ -186,6 +257,12 @@ namespace BracketGenerate
                 .Random();
         private Team GetRandomTeams(List<Team> teams, List<Match> dest,
                 List<Match> destTWO) => teams
+            .Where(x =>
+                !dest.Union(destTWO).SelectMany(d => new[] { d.BlueCorner?.ID, d.RedCorner?.ID }).ToList()
+                .Any(y => y == x.ID))
+            .ToList()
+            .Random();
+        private TeamUnion GetRandomTeamUnion(List<TeamUnion> teamUni, List<Match> dest, List<Match> destTWO) => teamUni
             .Where(x =>
                 !dest.Union(destTWO).SelectMany(d => new[] { d.BlueCorner?.ID, d.RedCorner?.ID }).ToList()
                 .Any(y => y == x.ID))

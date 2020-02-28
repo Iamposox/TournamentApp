@@ -5,8 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using TournamentBracketGenerator;
-using TournamentBracketGenerator.Model;
+using BracketGenerate.NewModel;
 using Tournaments.WPF.Interface;
 using Tournaments.WPF.Model;
 
@@ -23,7 +22,7 @@ namespace Tournaments.WPF.Manager
             CurrentParticipants = new List<Participant_Wrapper>();
             SeedCrap();
 
-            var e = new Tournament(CurrentParticipants.Select(x => x.Model).ToList());
+            //var e = new Tournament(CurrentParticipants.Select(x => x.Model).ToList());
             //e.GenerateTournamemtBrackets();
         }
         
@@ -41,7 +40,7 @@ namespace Tournaments.WPF.Manager
                         (
                             _participant: new Participant()
                             {
-                                Name = "SomeName",
+                                FirstName = "SomeName",
                                 LastName = "SomeLastName",
                                 Patronymic = "SomePatronymic",
                             },

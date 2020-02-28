@@ -1,5 +1,4 @@
-﻿using BracketGenerate.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,11 +12,11 @@ namespace Tournaments.WPF.ViewModel
 
         public ParticipaneManamentControllViewModel()
         {
-            var type = typeof(IParticipant);
-            AvalableTypes = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(s => s.GetTypes())
-                .Where(p => type.IsAssignableFrom(p))
-                .ToList();
+            //var type = typeof(IParticipant);
+            //AvalableTypes = AppDomain.CurrentDomain.GetAssemblies()
+                //.SelectMany(s => s.GetTypes())
+               // .Where(p => type.IsAssignableFrom(p))
+               // .ToList();
         }
     }
 }

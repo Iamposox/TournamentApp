@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
-using TournamentBracketGenerator.Model;
+using BracketGenerate.NewModel;
 using System.Threading.Tasks;
 
 namespace Tournaments.WPF.Model
@@ -47,10 +47,10 @@ namespace Tournaments.WPF.Model
 
         public string Name 
         { 
-            get => Model.Name; 
+            get => Model.FirstName; 
             set
             {
-                Model.Name = value;
+                Model.FirstName = value;
                 OnPropertyChanged(nameof(Name));
             }
         }

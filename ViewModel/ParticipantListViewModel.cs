@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TournamentBracketGenerator;
-using TournamentBracketGenerator.Model;
+using BracketGenerate.NewModel;
 using Tournaments.WPF.Model;
 
 namespace Tournaments.WPF.ViewModel

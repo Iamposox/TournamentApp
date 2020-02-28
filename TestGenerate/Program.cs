@@ -1,6 +1,4 @@
-﻿using BracketGenerate.Model;
-using BracketGenerate.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Tournaments.WPF.Model;
 using BracketGenerate;
@@ -14,15 +12,18 @@ namespace TestGenerate
     {
         public static List<Participant> CurrentParticipants { get; set; }
         public static List<Team> CurrentTeam { get; set; }
+        public static List<TeamUnion> CurTeam { get; set; }
         private static int i;
         static async Task Main(string[] args)
         {
+            CurTeam = new List<TeamUnion>();
             CurrentTeam = new List<Team>();
             CurrentParticipants = new List<Participant>();
             SeedCrap();
             SeedTeam();
-            var tournament = new GenerateTournament(CurrentTeam);
-            var matchesTeam = tournament.LaunchGenerationForTeams();
+            SeedTeamUnion();
+            var tournament = new GenerateTournament(CurTeam);
+            var matchesTeam = tournament.LaunchGenerationForUnion();
             var firstTeamMatches = matchesTeam.FirstRounds;
             for (i = 0; i < firstTeamMatches.Count; i++) 
             {
@@ -104,6 +105,19 @@ namespace TestGenerate
         private static void Match_MatchEnded(object _sender, Participant _winner)
         {
             Console.WriteLine(_winner.FirstName);
+        }
+        
+        public static void SeedTeamUnion() 
+        {
+            for (int i=0;i<64; i++) 
+            {
+                CurTeam.Add(new TeamUnion()
+                {
+                    TeamOne = CurrentTeam[i],
+                    TeamTwo = CurrentTeam[i+1]
+                });
+                i++;
+            }
         }
         private static void SeedTeam() 
         {
