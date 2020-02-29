@@ -39,13 +39,13 @@ namespace TestGenerate
             matches.EndRounds += EndRounds;
             matches.FillRounds();
             #region task 
-            var Matches = SetPairs(CurrentParticipants);
+            //var Matches = SetPairs(CurrentParticipants);
             await Task.Run(async () =>
             {
                 while (true)
                 {
                     Console.WriteLine("App is running");
-                    AssignedRandomMatchWinner(Matches);
+                    //AssignedRandomMatchWinner(Matches);
                     await Task.Delay(1000);
 
                     //Enter code here. how and more importain you want to check the 
@@ -69,14 +69,6 @@ namespace TestGenerate
         {
             Console.WriteLine($"Победитель в паре {i} {participant.DisplayDetailedName()}");
         }
-       // public static void EndMatches(object sender, Team team)
-       // {
-       //     Console.WriteLine($"Победитель в паре {i} {team.TeamName}");
-       // }
-       // public static void EndMatches(object sender, TeamUnion teamUni)
-       // {
-       //     Console.WriteLine($"Победитель в паре {i} {teamUni.TeamOne.TeamName}");
-       // }
         public static void EndRounds(object sender)
         {
             Console.WriteLine($"Все победители в раунде назначены");
@@ -92,46 +84,10 @@ namespace TestGenerate
                 //_matches[index].SetWinnerOfThePair(_matches[index].RedCorner);
             });
         }
-
-        private static List<Match> SetPairs(List<IParticipant> _users)
-        {
-            var result = new List<Match>();
-            for (int i = 0; i < _users.Count; i += 2)
-            {
-                result.Add(new Match() { RedCorner = _users[i], BlueCorner = _users[i + 1] });
-            }
-            return result;
-
-        }
-
         private static void Match_MatchEnded(object _sender, Participant _winner)
         {
             Console.WriteLine(_winner.FirstName);
         }
-        
-       //public static void SeedTeamUnion() 
-       //{
-       //    for (int i=0;i<64; i++) 
-       //    {
-       //        CurTeam.Add(new TeamUnion()
-       //        {
-       //            TeamOne = CurrentTeam[i],
-       //            TeamTwo = CurrentTeam[i+1]
-       //        });
-       //        i++;
-       //    }
-       //}
-       //private static void SeedTeam() 
-       //{
-       //    for(int i = 0; i < 64; i++) 
-       //    {
-       //        CurrentTeam.Add(new Team()
-       //        {
-       //            TeamName = "SomeTeamName"+i.ToString(),
-       //            TeamMember = CurrentParticipants
-       //        });
-       //    }
-       //}
         private static void SeedCrap()
         {
             for (int i = 0; i < 5; i++)

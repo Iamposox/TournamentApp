@@ -16,7 +16,7 @@ namespace BracketGenerate
         private int _initialPairCount;
         private int _qualificationPairCount;
         private int _roundsCount;
-        public List<Match> PreQualifyBrackets = new List<Match>();
+        public List<IMatch> PreQualifyBrackets = new List<IMatch>();
         private List<int> _assignedPrequilifiedBracketsId = new List<int>();
         //Also no need in teams, since they all are under single interface
         //public List<Team> teams = new List<Team>();
@@ -24,7 +24,7 @@ namespace BracketGenerate
         //public List<TeamUnion> teamUni= new List<TeamUnion>();
         Random rnd = new Random();
 
-        public List<FirstRound> Rounds = new List<FirstRound>();
+        public List<IMatch> Rounds = new List<IMatch>();
         //Yep we are also creating with Interface
         public GenerateTournament(List<IParticipant> totalParticipant) 
         {
@@ -112,10 +112,10 @@ namespace BracketGenerate
         {
             for (int i = 0; i < _qualificationPairCount; i++)
             {
-                var bracket = new Match(GetRandomParticipantTest(TotalParticipant, PreQualifyBrackets, PreQualifyBrackets),
+                var match = new Match(GetRandomParticipantTest(TotalParticipant, PreQualifyBrackets, PreQualifyBrackets),
                     GetRandomParticipantTest(TotalParticipant, PreQualifyBrackets, PreQualifyBrackets), PreQualifyBrackets.Count + 1);
                 // get "luckcy" :) prequlifyer for red corner
-                PreQualifyBrackets.Add(bracket);
+                PreQualifyBrackets.Add(match);
             }
         }
         //public void generateQualifiedRounds(List<Team> teams)
@@ -148,9 +148,9 @@ namespace BracketGenerate
 
             for (int count = 0; count < _initialPairCount; count++)
             {
-                var randomBracket = GetRandomBracket(PreQualifyBrackets, Rounds);
+                var randomBracket = GetRandomMatch(PreQualifyBrackets, Rounds);
 
-                var bracket = new FirstRound() { ID = Rounds.Count + 1 };
+                var bracket = new Match() { ID = Rounds.Count + 1 };
                 // add new bracket to round
                 Rounds.Add(bracket);
                 // if we have bracket use bracket winner else use participants who didn't need qualification
@@ -165,7 +165,7 @@ namespace BracketGenerate
                     bracket.RedCorner = GetRandomParticipantTest(TotalParticipant, PreQualifyBrackets, PreQualifyBrackets);
                 }
                 // blue corner
-                randomBracket = GetRandomBracket(PreQualifyBrackets, Rounds);
+                randomBracket = GetRandomMatch(PreQualifyBrackets, Rounds);
                 if (randomBracket != null)
                 {
                     bracket.BlueCornerPair = randomBracket;
@@ -259,8 +259,8 @@ namespace BracketGenerate
         private IParticipant GetRandomParticipantTest
             (
                 List<IParticipant> participantsFrom,
-                List<Match> dest,
-                List<Match> destTWO
+                List<IMatch> dest,
+                List<IMatch> destTWO
             )
             =>
                 participantsFrom
@@ -286,12 +286,12 @@ namespace BracketGenerate
         //    .ToList()
         //    .Random();
 
-        public Match GetRandomBracketTest(List<Match> source, List<FirstRound> dest, List<int> _countId) => (source.Count <= _countId.Count) ? null : source
-            .Where(x =>
-                !dest.SelectMany(d => new[] { d.RedCornerPair?.ID, d.BlueCornerPair.ID})
-                .Any(y => y == x.ID))
-            .ToList().Random();
-        private Match GetRandomBracket(List<Match> sourse, List<FirstRound> dest)
+        //public Match GetRandomBracketTest(List<Match> source, List<Fi> dest, List<int> _countId) => (source.Count <= _countId.Count) ? null : source
+        //    .Where(x =>
+        //        !dest.SelectMany(d => new[] { d.RedCornerPair?.ID, d.BlueCornerPair.ID})
+        //        .Any(y => y == x.ID))
+        //    .ToList().Random();
+        private IMatch GetRandomMatch(List<IMatch> sourse, List<IMatch> dest)
         {
             // if source and dest have same count then return null
             if (sourse.Count <= _assignedPrequilifiedBracketsId.Count)

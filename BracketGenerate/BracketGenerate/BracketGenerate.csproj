@@ -58,6 +58,7 @@
     <Compile Include="GenerateTournament.cs" />
     <Compile Include="Interface\IMatch.cs" />
     <Compile Include="Interface\IParticipant.cs" />
+    <Compile Include="Interface\IRounds.cs" />
     <Compile Include="NewModel\Team.cs" />
     <Compile Include="NewModel\TeamUnion.cs" />
     <Compile Include="NewModel\Tournament.cs" />
