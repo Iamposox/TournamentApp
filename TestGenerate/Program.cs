@@ -22,7 +22,7 @@ namespace TestGenerate
             for (i = 0; i < firstTeamMatches.Count; i++) 
             {
                 firstTeamMatches[i].EndMatch += EndMatches;
-                firstTeamMatches[i].SetWinnerOfThePair(matchesTeam.FirstRounds[i].RedCorner);
+                firstTeamMatches[i].SetWinnerOfThePair(matchesTeam.FirstRounds[i].RedCornerPair.RedCorner);
 
             }
             matchesTeam.EndRounds += EndRounds;

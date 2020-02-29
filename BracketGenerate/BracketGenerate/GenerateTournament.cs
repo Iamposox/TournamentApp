@@ -112,10 +112,9 @@ namespace BracketGenerate
         {
             for (int i = 0; i < _qualificationPairCount; i++)
             {
-                var bracket = new Match() { ID = PreQualifyBrackets.Count + 1 };
+                var bracket = new Match(GetRandomParticipantTest(TotalParticipant, PreQualifyBrackets, PreQualifyBrackets),
+                    GetRandomParticipantTest(TotalParticipant, PreQualifyBrackets, PreQualifyBrackets), PreQualifyBrackets.Count + 1);
                 // get "luckcy" :) prequlifyer for red corner
-                bracket.RedCorner = GetRandomParticipantTest(TotalParticipant, PreQualifyBrackets, PreQualifyBrackets);
-                bracket.BlueCorner = GetRandomParticipantTest(TotalParticipant, PreQualifyBrackets, PreQualifyBrackets);
                 PreQualifyBrackets.Add(bracket);
             }
         }

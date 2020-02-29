@@ -7,34 +7,35 @@ using System.Threading.Tasks;
 
 namespace BracketGenerate.NewModel
 {
-    public class Match
+    public class Match:IMatch
     {
-        public IParticipant BlueCorner { get; set; }
-        public IParticipant RedCorner { get; set; }
-        //public Team BlueCornerTeam { get; set; }
-        //public Team RedCornerTeam { get; set; }
-        //public TeamUnion UnionBlue { get; set; }
-        //public TeamUnion UnionRed { get; set; }
-        //Class Pair (even tho i am convice that Match is better name
-        //Doesnt need to hold objects of next pair
-        //Also it doesnt make sense that it hold two pairs.
-        //Please decribe the logic
-        public Match BlueCornerPair { get; set; }
-        public Match RedCornerPair { get; set; }
-
-        //use this type of comments please
+        public IParticipant BlueCorner { get; private set; }
+        public IParticipant RedCorner { get; private set; }
         /// <summary>
         /// Pair ID
         /// </summary>
-        public int ID { get; set; }
+        public int ID { get; private set; }
 
         //see this is why Match would sound better
-        
-        public Match() { }
-        public Match(Participant one, Participant two) 
+        public Match(IParticipant one, IParticipant two, int id) 
         {
+            ID = id;
             BlueCorner = one;
             RedCorner = two;
+        }
+        public event MatchEndedDelegate EndMatch;
+        
+        private IParticipant m_PairWinner;
+        public bool SetWinnerOfThePair(IParticipant _participant)
+        {
+            //See Participant class for the comparison logic
+            if (BlueCorner == _participant || RedCorner == _participant)
+            {
+                m_PairWinner = _participant;
+                EndMatch.Invoke(this, _participant);
+                return true;
+            }
+            return false;
         }
     }
 }
